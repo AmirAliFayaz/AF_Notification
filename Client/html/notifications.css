@@ -1,0 +1,202 @@
+#notifications-container {
+    position: fixed;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    max-width: 500px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.notification {
+    padding: 16px;
+    border-radius: 16px;
+    color: #E4E6EA;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 340px;
+    max-width: 100%;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    background: linear-gradient(135deg, rgba(31, 34, 40, 0.95), rgba(24, 26, 31, 0.95));
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2),
+                0 2px 4px rgba(0, 0, 0, 0.1),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.notification::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100%;
+    clip-path: inset(0);
+}
+
+.notification.success::before {
+    background: linear-gradient(to right, 
+        #00DC82 0%,
+        rgba(0, 220, 130, 0.5) 20%,
+        rgba(0, 220, 130, 0.3) 40%,
+        rgba(0, 220, 130, 0) 100%
+    );
+}
+
+.notification.error::before {
+    background: linear-gradient(to right, 
+        #FF5E5E 0%,
+        rgba(255, 94, 94, 0.5) 20%,
+        rgba(255, 94, 94, 0.3) 40%,
+        rgba(255, 94, 94, 0) 100%
+    );
+}
+
+.notification.info::before {
+    background: linear-gradient(to right, 
+        #0EA5E9 0%,
+        rgba(14, 165, 233, 0.5) 20%,
+        rgba(14, 165, 233, 0.3) 40%,
+        rgba(14, 165, 233, 0) 100%
+    );
+}
+
+.notification.debug::before {
+    background: linear-gradient(to right, 
+        #F59E0B 0%,
+        rgba(245, 158, 11, 0.5) 20%,
+        rgba(245, 158, 11, 0.3) 40%,
+        rgba(245, 158, 11, 0) 100%
+    );
+}
+
+.notification i {
+    position: relative;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-size: 18px;
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+                0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.notification.success i {
+    color: #00DC82;
+}
+
+.notification.error i {
+    color: #FF5E5E;
+}
+
+.notification.info i {
+    color: #0EA5E9;
+}
+
+.notification.debug i {
+    color: #F59E0B;
+}
+
+.notification .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: relative;
+}
+
+.notification .title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #FFFFFF;
+    letter-spacing: 0.3px;
+}
+
+.notification .message {
+    font-size: 13.5px;
+    color: #A1A5AD;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+.notification .progress {
+    position: absolute;
+    bottom: -16px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+}
+
+.notification.success .progress-bar {
+    background: linear-gradient(to right, #00DC82, #00B669);
+}
+
+.notification.error .progress-bar {
+    background: linear-gradient(to right, #FF5E5E, #FF3838);
+}
+
+.notification.info .progress-bar {
+    background: linear-gradient(to right, #0EA5E9, #0284C7);
+}
+
+.notification.debug .progress-bar {
+    background: linear-gradient(to right, #F59E0B, #D97706);
+}
+
+.notification .progress-bar {
+    height: 100%;
+    width: 100%;
+    transform-origin: left;
+    animation: progress 5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.notification.fade-out {
+    animation: fadeOut 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.96);
+    }
+}
+
+@keyframes progress {
+    from {
+        transform: scaleX(1);
+    }
+    to {
+        transform: scaleX(0);
+    }
+} 
